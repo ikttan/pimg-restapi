@@ -14,7 +14,7 @@ This repository doesn't intent to provide advance RestAPI setup, such as using J
 
 Download the Raspberry Pi Imager for your OS from https://www.raspberrypi.org/downloads/.  Start the Pi Imager
 
-![Pi Imager](pi-imager.jpg)
+![Pi Imager](pi-imager.png)
 
 Select the "Raspberry Pi OS (Other)" and then select the "Raspberry Pi OS Lite (32 Bit)".  We are selecting this as we do not need to load up the heavy GUI interface and we want a minimal Raspberry Pi OS image.  Then select your appropriate SD Card to write to and click on the "WRITE" button.  This stage will take some time to complete.
 
