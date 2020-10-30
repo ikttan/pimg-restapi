@@ -12,15 +12,34 @@ This repository doesn't intent to provide advance RestAPI setup, such as using J
 
 ## Raspberry Pi OS (Raspbian) and headless setup
 
-### headless
+Download the Raspberry Pi Imager for your OS from https://www.raspberrypi.org/downloads/.  Start the Pi Imager
 
-### SSH
+![Pi Imager](pi-imager.jpg)
+
+Select the "Raspberry Pi OS (Other)" and then select the "Raspberry Pi OS Lite (32 Bit)".  We are selecting this as we do not need to load up the heavy GUI interface and we want a minimal Raspberry Pi OS image.  Then select your appropriate SD Card to write to and click on the "WRITE" button.  This stage will take some time to complete.
+
+### Headless
+
+The term headless device (computer) is a device that can operate without a monitor (the "headless"), keyboard, and mouse. A headless device is typically controlled over a network connection, and in our case, it is via a Secure SHell (SSH) connection over the network.  There are 2 main task (one more if you want to fix the IP address to access the device) which is to
+
+1. Ensure that the SSH port is open
+2. The Raspberry Pi is connected to a network (in our case, a wireless network)
+
+#### Enable SSH
+
+After the image has been written to the SD Card, the SD Card can be access via your file explorer / manager and there will be two folders.  The ```boot``` and ```raspfs```.  In the ```boot``` folder, create an empty (or you can enter any text) file called ```ssh``` (with no file extension) and also a file called ```wlan``` with the following content,
+
+```
+
+```
+
+You now should have a raspberry pi that you can boot and will connect to your local wi-fi.  The only thing is that it is by default using DHCP and hence you need to be able to access your wi-fi router and find out the IP number that it obtained through the DHCP.  We call it the ```pi_IP_number``` as a reference here.  Open up a shell (or even your Windows command line interface) and type in
 
 ~~~
 ssh pi@<pi_IP_number>
 ~~~
 
-pi:raspberry
+The default password on the Raspberry Pi for the user ID ```pi``` is ```raspberry```.
 
 ## Installation of pip, picamera and requests library
 
