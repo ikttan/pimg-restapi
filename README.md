@@ -100,11 +100,9 @@ The 2nd set of numbers are the range separated by commas with no space.  Note th
 ```
 sudo crontab -e
 ```
-
-Check that it is in the crontab list and restart the cron service.
+Check that it is in the crontab list.  It should proceed without any further intervention.
 ```
 sudo crontab -l
-sudo service cron restart
 ```
 
 ## Python/Flask script for RestAPI
@@ -115,6 +113,50 @@ On the server, not on the Pi, you will also need to have the right libraries.  F
 sudo pip install python-opencv
 ~~~
 
+You will also need to install Flask, and others as appropriate.  The python/flask code is as follows:
 
 ~~~
+#!/usr/bin/python
+
+from flask import Flask, request, Response
+import time
+import jsonpickle
+import base64
+import cv2
+
+# Initialize the Flask application
+app = Flask(__name__)
+
+# route http posts to this method, you can use others as well, but make sure that this is reflected corrected on the Raspberry Pi side, the click.py file from above.
+@app.route('/api/click', methods=['POST'])
+
+def test():
+    r = request
+    # setfile name based on time, which is a floating point but we only need it to the integer
+    rfile = str(int(time.time())) + ".jpg"
+    # decode image
+    img  = base64.b64decode(r.data)
+    with open(rfile, 'wb') as f:
+        f.write(img)
+
+    # probably a better way to do this without OpenCV
+    myImg = cv2.imread(rfile)
+    response = {'message': 'image received. size= %d x %d' % (myImg.shape[1], myImg.shape[0] )}
+    # encode response using jsonpickle
+    response_pickled = jsonpickle.encode(response)
+    return Response(response=response_pickled, status=200, mimetype="application/json")
+
+# start flask app
+# host="0.0.0.0" allows it to be accessed from external IP
+app.run(host="0.0.0.0", port=5000)
 ~~~
+
+You can then go to the server and set it as a background process or just run it with
+
+```
+nohup clickApi.py &
+```
+
+There are better ways, but this is sufficient to run it.  By default, there is a log file called ```nohup.out```.
+
+My documentation may be confusing, so feel free to email me at ikttan@gmail.com if you need further explanation.
