@@ -36,8 +36,8 @@ ctrl_interface=/var/run/wpa_supplicant
 
 network={
   scan_ssid=1
-  ssid="ian@timebb"
-  psk="0122018108"
+  ssid="<Your_WiFi_SSID>"
+  psk="<Your_WiFi_Password>"
 }
 ```
 
