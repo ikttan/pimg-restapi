@@ -27,7 +27,7 @@ The term headless device (computer) is a device that can operate without a monit
 
 #### Enable SSH
 
-After the image has been written to the SD Card, the SD Card can be access via your file explorer / manager and there will be two folders.  The ```boot``` and ```raspfs```.  In the ```boot``` folder, create an empty (or you can enter any text) file called ```ssh``` (with no file extension) and also a file called ```wpa_supplicant.conf``` with the following content,
+After the image has been written to the SD Card, the SD Card can be access via your file explorer / manager and there will be two folders.  The ```boot``` and ```rootfs```.  In the ```boot``` folder, create an empty (or you can enter any text) file called ```ssh``` (with no file extension) and also a file called ```wpa_supplicant.conf``` with the following content (note that I am in Malaysia, so my country is ```my```, you should edit this appropriately,
 
 ```
 country=my
